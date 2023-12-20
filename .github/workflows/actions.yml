@@ -15,7 +15,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     outputs:
-      OPB: ${{ steps.Run.outputs.test }    
+      OPB: ${{ steps.Run.outputs.test }}    
     defaults:
       run:
         shell : bash
