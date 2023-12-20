@@ -1,1 +1,1 @@
-echo "Testing has been done !!"
+echo "We were passed $1 from build"

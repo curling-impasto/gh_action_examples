@@ -39,10 +39,8 @@ jobs:
         shell : bash
         working-directory: ./scripts    
     steps:
-      - env:
-          OPT: ${{needs.build.outputs.OPB}}
       - name: Checkout to runner
         uses: actions/checkout@v3
-
-      - name: Run script
+      - env:
+          OPT: ${{needs.build.outputs.OPB}}
         run: ./test.sh "OPT"
