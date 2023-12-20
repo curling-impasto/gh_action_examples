@@ -14,24 +14,20 @@ jobs:
 
   build:
     runs-on: ubuntu-latest
+    outputs:
+      OPB: ${{ steps.Run.outputs.test }    
     defaults:
       run:
         shell : bash
         working-directory: ./scripts    
     steps:
-      - name: Checkout to runner
+      - name: Checkout
         uses: actions/checkout@v3
-
       - name: Run
-        run: 'bash build.sh'
+        run: ./build.sh >> "$GITHUB_OUTPUT"
         continue-on-error: true
-
-      - name: Run2
-        run: 'bash bui.sh'
-        continue-on-error: true
-
       - name: Check
-        if: steps.Run.outcome  != 'success' || steps.Run2.outcome  != 'success'
+        if: steps.Run.outcome  != 'success'
         run: exit 1
 
   test:
@@ -43,8 +39,10 @@ jobs:
         shell : bash
         working-directory: ./scripts    
     steps:
+      - env:
+          OPT: ${{needs.build.outputs.OPB}}
       - name: Checkout to runner
         uses: actions/checkout@v3
 
       - name: Run script
-        run: 'bash test.sh'
+        run: ./test.sh "OPT"
