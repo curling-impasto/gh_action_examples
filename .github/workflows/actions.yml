@@ -15,6 +15,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     defaults:
+      continue-on-error: true
       run:
         shell : bash
         working-directory: ./scripts    
@@ -22,8 +23,12 @@ jobs:
       - name: Checkout to runner
         uses: actions/checkout@v3
 
-      - name: Run script
+      - name: Run
         run: 'bash build.sh'
+
+      - name: Check
+        if: steps.sync.outcome  != 'success'
+        run: exit 1
 
   test:
     if: ${{ always() }}
