@@ -2,7 +2,7 @@
 
 echo "Build my code" 
 
-i=10
-while i<5; do 
-echo "Do -: $1"
+for i in $(seq 1 5);
+do
+    echo $i
 done
