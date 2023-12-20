@@ -15,7 +15,6 @@ jobs:
   build:
     runs-on: ubuntu-latest
     defaults:
-      continue-on-error: true
       run:
         shell : bash
         working-directory: ./scripts    
@@ -25,9 +24,14 @@ jobs:
 
       - name: Run
         run: 'bash build.sh'
+        continue-on-error: true
+
+      - name: Run2
+        run: 'bash bui.sh'
+        continue-on-error: true
 
       - name: Check
-        if: steps.sync.outcome  != 'success'
+        if: steps.Run.outcome  != 'success' || steps.Run2.outcome  != 'success'
         run: exit 1
 
   test:
