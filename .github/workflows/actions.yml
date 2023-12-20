@@ -1,0 +1,43 @@
+# This is a basic workflow to help you get started with Actions
+
+name: Github_CI
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+  workflow_dispatch:
+
+jobs:
+
+  build:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        shell : bash
+        working-directory: ./scripts    
+    steps:
+      - name: Checkout to runner
+        uses: actions/checkout@v3
+
+      - name: Run script
+        run: 'bash build.sh'
+
+  test:
+    if: ${{ always() }}
+    needs: build
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        shell : bash
+        working-directory: ./scripts    
+    steps:
+      - name: Checkout to runner
+        uses: actions/checkout@v3
+
+      - name: Run script
+        run: 'bash test.sh'
+      - name: The job has failed
+        if: ${{ failure() }}
