@@ -39,5 +39,3 @@ jobs:
 
       - name: Run script
         run: 'bash test.sh'
-      - name: The job has failed
-        if: ${{ failure() }}
