@@ -27,4 +27,4 @@ jobs:
 
       # Runs a single command using the runners shell
       - name: Run a one-line script
-        run: 'cd scripts; ./build.sh'
+        run: 'cd scripts; bash build.sh'
