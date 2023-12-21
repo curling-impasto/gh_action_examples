@@ -24,7 +24,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
       - name: Run
-        run: echo "script="$(./build.sh)"" >> $GITHUB_OUTPUT
+        run: echo "script=$(./build.sh)" >> "$GITHUB_OUTPUT"
         continue-on-error: true
       - name: Check
         if: steps.Run.outcome  != 'success'
