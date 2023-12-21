@@ -50,8 +50,15 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Run Initialtest
-        run: >
-            echo "FOO=35" >> "$GITHUB_ENV"
+        run: echo "FOO=35" >> "$GITHUB_ENV"    
+      - name: Run Secondtest
+        run: |
             ./test.sh "$OPT"
+            ./test.sh "$FOO"
+      - name: Run ThirdTest 
+        run: >
+            bo=$(./build.sh);
+            echo "final=$bo" >> "$GITHUB_OUTPUT"
       - name: Run FinalTest 
-        run: ./test.sh "$FOO"
+        run: echo "$final"
+            
