@@ -28,8 +28,8 @@ jobs:
         id: runbuild  
         continue-on-error: true        
         run: >
-            bo=$(./build.sh); echo $bo
-           # echo "out=${bo}" >> "$GITHUB_OUTPUT"
+            bo=$(./build.sh);
+            echo "out=$bo" >> "$GITHUB_OUTPUT"
         
       - name: Check
         if: steps.runbuild.outcome  != 'success'
