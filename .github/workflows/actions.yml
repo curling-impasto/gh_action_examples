@@ -15,7 +15,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     outputs:
-      OPB: ${{ steps.Run.outputs.test }}    
+      op: ${{ steps.Run.outputs.out }    
     defaults:
       run:
         shell : bash
@@ -24,12 +24,12 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
       - name: Run
-        uses: 'selfagency/capture-output@v1'
-        with:
-          cmd: cd scripts; ./build.sh
-          hide-warnings: true
+        run: |
+          bo=$(./build.sh)
+          echo "out=${bo}" >> "$GITHUB_OUTPUT"
+        continue-on-error: true
       - name: Check
-        if: steps.Run.outcome != 'success'
+        if: steps.Run.outcome  != 'success'
         run: exit 1
 
   test:
@@ -41,8 +41,10 @@ jobs:
         shell : bash
         working-directory: ./scripts    
     steps:
+      - env:
+          OPT: ${{ needs.build.outputs.op }}
       - name: Checkout to runner
         uses: actions/checkout@v3
-      - env:
-          OPT: ${{needs.build.outputs.OPB}}
+
+      - name: Run script
         run: ./test.sh "OPT"
