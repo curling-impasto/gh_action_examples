@@ -49,6 +49,10 @@ jobs:
       - name: Checkout to runner
         uses: actions/checkout@v3
 
-      - name: Run script
+      - name: Run Initialtest
         run: >
-            ./test.sh "$OPT"
+            ./test.sh "$OPT";
+            FOO=$(echo 35);
+            echo "::set-env name=FOO::$FOO"
+      - name: Run FinalTest 
+        run: ./test.sh "$FOO"
