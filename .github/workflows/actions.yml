@@ -51,6 +51,7 @@ jobs:
 
       - name: Run Initialtest
         run: >
-            FOO=35; ./test.sh "$OPT"
+            echo "FOO=35" >> "$GITHUB_OUTPUT"
+            ./test.sh "$OPT"
       - name: Run FinalTest 
         run: ./test.sh "$FOO"
