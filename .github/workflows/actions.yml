@@ -58,7 +58,7 @@ jobs:
       - name: Run ThirdTest 
         run: >
             bo=$(./build.sh);
-            echo "final=$bo" >> "$GITHUB_OUTPUT"
+            echo "final=$bo" >> "$GITHUB_ENV"
       - name: Run FinalTest 
         run: echo "$final"
             
