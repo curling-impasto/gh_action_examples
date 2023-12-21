@@ -36,19 +36,19 @@ jobs:
         run: exit 1
 
   test:
-    if: ${{ always() }}
+    if: success()
     needs: build
     runs-on: ubuntu-latest
+    env:
+        OPT: ${{ needs.build.outputs.op }}
     defaults:
       run:
-        shell : bash
+        shell: bash
         working-directory: ./scripts    
     steps:
-      - env:
-          OPT: ${{ needs.build.outputs.op }}
-
       - name: Checkout to runner
         uses: actions/checkout@v3
 
       - name: Run script
-        run: ./test.sh "$OPT"
+        run: >
+            ./test.sh "$OPT"
