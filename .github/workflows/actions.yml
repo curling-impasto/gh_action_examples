@@ -1,4 +1,6 @@
-# This is a basic workflow to help you get started with Actions
+# This is a basic workflow to learn Actions
+# IT runs 2 jobs, test is dependent on build.
+# Build job passes a shared variable to test and also test job passes variables among steps. 
 
 name: Github_CI
 
