@@ -51,8 +51,7 @@ jobs:
 
       - name: Run Initialtest
         run: >
-            ./test.sh "$OPT";
-            FOO=$(echo 35);
-            echo "::set-env name=FOO::$FOO"
+            FOO=35; echo "::set-env name=FOO::$FOO";
+            ./test.sh "$OPT"
       - name: Run FinalTest 
         run: ./test.sh "$FOO"
