@@ -26,7 +26,7 @@ jobs:
       - name: Run
         uses: 'selfagency/capture-output@v1'
         with:
-          cmd: ./build.sh
+          cmd: cd scripts; ./build.sh
           hide-warnings: true
       - name: Check
         if: steps.Run.outcome != 'success'
