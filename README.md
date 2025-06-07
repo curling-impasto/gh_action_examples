@@ -54,5 +54,12 @@ A successful workflow run:
 
 1. **build job:**  
    - Checks out code  
-   - Runs `build.sh` and
-
+   - Runs `build.sh` and saves the output  
+   - Fails if the build does not succeed
+
+2. **test job:**  
+   - Receives build output as `$OPT`  
+   - Runs `test.sh` with `$OPT` and `$FOO`  
+   - Runs `build.sh` again and prints its output
+
+---
